@@ -6,7 +6,7 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:57:58 by tdausque          #+#    #+#             */
-/*   Updated: 2024/12/26 15:00:48 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:23:26 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char	*fill_stash(int fd, char *buff, char *stash);
 char	*extract_line(char *line);
 char	*init_stash(char *stash);
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(char *src);
-char	*ft_strchr(const char *s, int c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	gnl_strlen(const char *s);
+char	*gnl_strdup(char *src);
+char	*gnl_strchr(const char *s, int c);
+char	*gnl_substr(char const *s, unsigned int start, size_t len);
 
 #endif 

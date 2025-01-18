@@ -6,7 +6,7 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:07:58 by tdausque          #+#    #+#             */
-/*   Updated: 2024/12/26 15:01:18 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:24:16 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*fill_stash(int fd, char *buff, char *stash)
 	int		b_reads;
 
 	b_reads = 1;
-	while (b_reads > 0 && !ft_strchr(buff, '\n'))
+	while (b_reads > 0 && !gnl_strchr(buff, '\n'))
 	{
 		b_reads = read(fd, buff, BUFFER_SIZE);
 		if (b_reads < 0 || (!b_reads && !stash[0]))
@@ -47,7 +47,7 @@ char	*extract_line(char *line)
 	i = 0;
 	while (line[i] != '\0' && line[i] != '\n')
 		i++;
-	tmp = ft_substr(line, i + 1, ft_strlen(line));
+	tmp = gnl_substr(line, i + 1, gnl_strlen(line));
 	if (line[i] == '\n')
 		line[++i] = '\0';
 	return (tmp);

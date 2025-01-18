@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdausque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 07:46:08 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/09 19:29:54 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:32:12 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/so_long.h"
+#include "../includes/so_long.h"
 
 // centrer les elemts de la map
 int	center_x(char **map)
@@ -78,7 +78,7 @@ int	close_window(t_game *game)
 {
 	if (!game)
 		return (0);
-	// destroy_images(game, elemt);
+	destroy_images(game);
 	free_map(game);
 	if (game->mlx && game->mlx_win)
 		mlx_destroy_window(game->mlx, game->mlx_win);

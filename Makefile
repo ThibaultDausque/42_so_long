@@ -6,7 +6,7 @@
 #    By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/24 20:23:59 by tdausque          #+#    #+#              #
-#    Updated: 2025/01/12 17:33:27 by tdausque         ###   ########.fr        #
+#    Updated: 2025/01/18 12:19:09 by tdausque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,27 +16,50 @@
 
 # Program for compiling C programs
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g
 INCLUDES := -I./includes
-FT_PRINTF := ft_printf/ft_printf.a
-LIBFT := lib/libft.a
-GNL := get_next_line/get_next_line.a
-INCLUDE := -I INCLUDE
-
+MLX_FILE := libmlx.a
+MLX_FLAG := -lX11 -lXext
+MLX_PATH := ./minilibx-linux/
+MLX_LIB := $(addprefix $(MLX_PATH), $(MLX_FILE))
+MLX_EX := $(MLX_LIB) $(MLX_FLAG)
 NAME := so_long
 
 # =============================================================================
 #	📂 SOURCES & OBJECTS 📂
 # =============================================================================
 
-SRCS_SO_LONG = src/game.c src/game_2.c src/main.c \
+OBJ_DIR := objs
+
+SRCS_SO_LONG := src/game.c src/game_2.c src/main.c \
 	src/parse.c src/parse_2.c src/utils.c src/utils_2.c \
 	src/window.c src/window_2.c
 
-SRC := $(SRCS_SO_LONG)
+SRCS_LIBFT := libft/ft_calloc.c libft/ft_bzero.c libft/ft_memchr.c libft/ft_memcmp.c libft/ft_memcpy.c libft/ft_memmove.c libft/ft_memset.c \
+	libft/ft_atoi.c libft/ft_itoa.c libft/ft_strdup.c libft/ft_split.c libft/ft_strchr.c libft/ft_strjoin.c libft/ft_strlcat.c libft/ft_strlcpy.c \
+	libft/ft_strlen.c libft/ft_strncmp.c libft/ft_strnstr.c libft/ft_strrchr.c libft/ft_strtrim.c libft/ft_strmapi.c libft/ft_substr.c \
+	libft/ft_isalnum.c libft/ft_isalpha.c libft/ft_isascii.c libft/ft_isdigit.c libft/ft_isprint.c libft/ft_tolower.c libft/ft_toupper.c \
+	libft/ft_putchar_fd.c libft/ft_putendl_fd.c libft/ft_putnbr_fd.c libft/ft_putstr_fd.c libft/ft_striteri.c libft/ft_lstnew_bonus.c \
+	libft/ft_lstadd_front_bonus.c libft/ft_lstsize_bonus.c libft/ft_lstlast_bonus.c libft/ft_lstadd_back_bonus.c libft/ft_lstdelone_bonus.c
+	
+SRCS_PRINTF := ft_printf/ft_printf.c \
+	ft_printf/ft_print_unbr.c \
+	ft_printf/ft_print_str.c \
+	ft_printf/ft_print_ptr.c \
+	ft_printf/ft_print_nbr.c \
+	ft_printf/ft_print_hex.c \
+	ft_printf/ft_print_char.c
 
-OBJ_DIR := objs
-OBJS := $(SRC:%.c=$(OBJ_DIR)/%.o)
+SRCS_GNL := get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+
+SRCS := $(SRCS_SO_LONG) $(SRCS_LIBFT) $(SRCS_PRINTF) $(SRCS_GNL)
+
+OBJS_SO_LONG := $(addprefix $(OBJ_DIR)/, $(SRCS_SO_LONG:.c=.o))
+OBJS_LIBFT := $(addprefix $(OBJ_DIR)/, $(SRCS_LIBFT:.c=.o))
+OBJS_PRINTF := $(addprefix $(OBJ_DIR)/, $(SRCS_PRINTF:.c=.o))
+OBJS_GNL := $(addprefix $(OBJ_DIR)/, $(SRCS_GNL:.c=.o))
+
+OBJS := $(OBJS_GNL) $(OBJS_LIBFT) $(OBJS_PRINTF) $(OBJS_SO_LONG)
 
 # =============================================================================
 #	📊 PROGRESS BAR CONFIG 📊
@@ -60,48 +83,47 @@ endef
 #	🏗️ RULES 🏗️
 # =============================================================================
 
-all: libft ft_printf get_next_line $(NAME)
+all: $(NAME)
 	@echo "\n🎉 $(NAME) built successfully!"
 
-$(NAME): $(OBJS) $(LIBFT) $(FT_PRINTF) $(GNL)
-	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
+$(NAME): $(OBJS) mlx
+	$(CC) $(OBJS) $(MLX_EX) -o $(NAME)
 	@echo "\n🚀 $(NAME) created!"
 
-$(OBJ_PATH)/%.o: %.c
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(call progress_bar)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+# -----------------------------------------------------------------------------
+# RULES FOR SPECIFIC PARTS
+# -----------------------------------------------------------------------------
 
-# =============================================================================
-# LIBFT
-# =============================================================================
+mlx:
+	@make -sC $(MLX_PATH)
 
-$(LIBFT):
-	@cd libft && make --no-print-directory
+libft: $(OBJS_LIBFT)
+	@ar rc $(NAME) $(OBJS_LIBFT)
+	@ranlib $(NAME)
+	@echo "📚 libft part built!"
 
-# =============================================================================
-# FT_PRINTF
-# =============================================================================
+printf: $(OBJS_PRINTF)
+	@ar rc $(NAME) $(OBJS_PRINTF)
+	@ranlib $(NAME)
+	@echo "🖨️ printf part built!"
 
-$(FT_PRINTF):
-	@cd ft_printf && make --no-print-directory
-
-# =============================================================================
-# GET_NEXT_LINE
-# =============================================================================
-GNL_SRCS := get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
-
-$(GNL):
-	@cd get_next_line && cc $(GNL_SRCS) 
+gnl: $(OBJS_GNL)
+	@ar rc $(NAME) $(OBJS_GNL)
+	@ranlib $(NAME)
+	@echo "📜 gnl part built!"
 
 # =============================================================================
 # CLEANING RULES
 # =============================================================================
 
 clean:
-	@rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_DIR)
+	@make clean -sC $(MLX_PATH)
 	@echo "🧹 Object files cleaned!"
 
 fclean: clean
@@ -109,7 +131,7 @@ fclean: clean
 	@echo "💥 $(NAME) removed!"
 
 re: fclean all
-	@echo "🔄 Rebuilding $(NAME)..."
+# @echo "🔄 Rebuilding $(NAME)..."
 
 # =============================================================================
 # 💼 PHONY RULES 💼

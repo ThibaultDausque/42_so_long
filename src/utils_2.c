@@ -6,11 +6,11 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:25:53 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/12 13:27:26 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:17:48 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/so_long.h"
+#include "../includes/so_long.h"
 
 void	loop_item_exit(t_game *game, int x, int y)
 {

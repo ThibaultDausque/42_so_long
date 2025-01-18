@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdausque <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 14:05:53 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/09 16:00:39 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:23:53 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/so_long.h"
+#include "../includes/so_long.h"
 
 // verifier l'extension .ber
 int	correct_file(char *filename)
@@ -135,7 +135,12 @@ int	map_elements(t_game *game)
 		ft_printf("%s\n", START_ERR);
 		result = 0;
 	}
-	if (!correct_file(game->filename))
+	if (!enclosed_map(game->map))
+	{
+		ft_printf("%s\n", WALL_ERR);
+		result = 0;
+	}
+	else if (!correct_file(game->filename))
 	{
 		ft_printf("%s\n", FILE_ERR);
 		result = 0;

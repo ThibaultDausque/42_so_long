@@ -6,7 +6,7 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:00:53 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/12 12:56:18 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:31:12 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ void	destroy_images(t_game *game);
 void	put_player(t_game *game, char **map);
 void	render_map(t_game *game, int x, int y);
 int		count_items(char **map);
+int		enclosed_map(char **map);
 #endif

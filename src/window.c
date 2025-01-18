@@ -6,11 +6,11 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 12:06:06 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/10 09:47:39 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:25:29 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/so_long.h"
+#include "../includes/so_long.h"
 
 // afficher le joueur
 void	put_player(t_game *game, char **map)

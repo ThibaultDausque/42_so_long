@@ -6,11 +6,11 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 12:58:24 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/09 18:16:35 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:52:22 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/so_long.h"
+#include "../includes/so_long.h"
 
 // valide l'existence de la map et renvoi sa taille.
 int	valid_map_and_size(t_game *game)
@@ -25,7 +25,6 @@ int	valid_map_and_size(t_game *game)
 	fd = open(game->filename, O_RDONLY);
 	if (fd == -1)
 	{
-		close(fd);
 		ft_printf("%s\n", ER_FD);
 		return (0);
 	}
@@ -126,16 +125,14 @@ int	enclosed_map(char **map)
 	i = 1;
 	while (map[i])
 	{
-		if (map[i][0] != '1')
-			return (0);
-		else if (map[i][j - 1] != '1')
+		if (map[i][0] != '1' || map[i][j - 1] != '1')
 			return (0);
 		i++;
 	}
 	j = 0;
-	while (map[i][j])
+	while (map[i - 1][j] && map[i - 1][j] != '\n')
 	{
-		if (map[i][j] != '1')
+		if (map[i - 1][j] != '1')
 			return (0);
 		j++;
 	}

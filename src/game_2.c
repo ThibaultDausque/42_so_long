@@ -6,11 +6,11 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 12:52:01 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/12 13:05:00 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:35:04 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/so_long.h"
+#include "../includes/so_long.h"
 
 int		count_items(char **map)
 {

@@ -6,13 +6,13 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:24:15 by tdausque          #+#    #+#             */
-/*   Updated: 2024/12/26 15:01:41 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:25:05 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	gnl_strlen(const char *s)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
 	while (s && *s != (unsigned char)c && *s != '\0')
 		s++;
@@ -33,7 +33,7 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strdup(char *src)
+char	*gnl_strdup(char *src)
 {
 	int		size;
 	char	*dest;
@@ -44,7 +44,7 @@ char	*ft_strdup(char *src)
 	j = 0;
 	if (!src)
 		return (0);
-	size = ft_strlen(src);
+	size = gnl_strlen(src);
 	dest = (char *)malloc((size + 1) * sizeof(char));
 	if (!dest)
 		return (0);
@@ -58,7 +58,7 @@ char	*ft_strdup(char *src)
 	return (dest);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*gnl_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	i;
@@ -68,10 +68,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	j = start;
 	if (!s)
 		return (NULL);
-	if (start >= ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
+	if (start >= gnl_strlen(s))
+		return (gnl_strdup(""));
+	if (len > gnl_strlen(s + start))
+		len = gnl_strlen(s + start);
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (0);

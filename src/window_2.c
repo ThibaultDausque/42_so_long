@@ -6,11 +6,11 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 13:02:20 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/12 13:41:03 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:43:46 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/so_long.h"
+#include "../includes/so_long.h"
 
 void	render_map(t_game *game, int x, int y)
 {
@@ -41,7 +41,7 @@ void	render_map(t_game *game, int x, int y)
 				mlx_put_image_to_window(game->mlx, game->mlx_win,
 					game->item_img, img_width + game->pos_x,
 					img_height + game->pos_y);
-			if (game->map[y][x] == 'E' && count_items(game->map) == 0)
+			if (game->map[y][x] == 'E')
 				mlx_put_image_to_window(game->mlx, game->mlx_win,
 					game->exit_img, img_width + game->pos_x,
 					img_height + game->pos_y);

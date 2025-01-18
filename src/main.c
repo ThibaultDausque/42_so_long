@@ -6,12 +6,12 @@
 /*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 19:21:22 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/09 17:16:12 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:30:35 by tdausque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./minilibx-linux/mlx.h"
-#include "./includes/so_long.h"
+#include "../minilibx-linux/mlx.h"
+#include <so_long.h>
 
 int	main(int argc, char **argv)
 {
@@ -33,4 +33,5 @@ int	main(int argc, char **argv)
 	if (!elements)
 		return (0);
 	create_window(game);
+	return (0);
 }
