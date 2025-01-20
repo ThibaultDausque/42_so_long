@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 14:00:53 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/18 13:31:12 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/20 19:13:52 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include "../minilibx-linux/mlx.h"
-# include "../libft/libft.h"
 # include "../get_next_line/get_next_line.h"
 # include "../ft_printf/ft_printf.h"
 # include <fcntl.h>
@@ -27,6 +25,12 @@
 # define START_ERR "Il faut une position de depart."
 # define ITEM_ERR "Il faut des items a collecter."
 # define FILE_ERR "Erreur lors de l'execution du fichier (.ber)."
+
+typedef struct  s_point
+{
+    int           x;
+    int           y;
+}	t_point;
 
 typedef struct s_game
 {
@@ -82,4 +86,7 @@ void	put_player(t_game *game, char **map);
 void	render_map(t_game *game, int x, int y);
 int		count_items(char **map);
 int		enclosed_map(char **map);
+void	flood_fill(char **map, t_point size, t_point begin);
+void	fill(char **map, t_point size, t_point cur, char to_fill);
+char	**dup_map(char **map);
 #endif

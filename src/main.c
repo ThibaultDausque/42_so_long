@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdausque <tdausque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibault <thibault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 19:21:22 by tdausque          #+#    #+#             */
-/*   Updated: 2025/01/18 12:30:35 by tdausque         ###   ########.fr       */
+/*   Updated: 2025/01/19 23:21:12 by thibault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minilibx-linux/mlx.h"
-#include <so_long.h>
+#include "../includes/so_long.h"
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
 	t_game	*game;
 	int		elements;
+	char	**map;
+	int		i;
 
 	(void) argc;
 	if (argc != 2)
@@ -29,9 +31,13 @@ int	main(int argc, char **argv)
 	}
 	game->filename = argv[1];
 	game->map = get_map(game);
-	elements = map_elements(game);
-	if (!elements)
-		return (0);
-	create_window(game);
+	map = dup_map(game->map);
+	i = 0;
+	while (map[i])
+		printf("%s\n", map[i++]);
+	// elements = map_elements(game);
+	// if (!elements)
+	// 	return (0);
+	// create_window(game);
 	return (0);
 }
